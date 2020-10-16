@@ -1,7 +1,6 @@
 package main
 
 import (
-	"SafeToGo/Utils"
 	"github.com/gin-gonic/gin"
 )
 
@@ -15,7 +14,7 @@ func configureRouter(g *gin.Engine) {
 func attachMiddlewares(g *gin.Engine) {
 
 	// Write logs to stdout if GIN_MODE is debug
-	if Utils.GetEnvVar("GIN_MODE") == "debug" { g.Use(gin.Logger()) }
+	if GetEnvVar("GIN_MODE") == "debug" { g.Use(gin.Logger()) }
 	// Allowing COR requests from all origins
 	g.Use(func(c *gin.Context) {
 		referer := c.Request.Referer()

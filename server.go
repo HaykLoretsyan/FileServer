@@ -1,7 +1,6 @@
 package main
 
 import (
-	"SafeToGo/Utils"
 	"crypto/tls"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -17,7 +16,7 @@ func createServer(engine *gin.Engine) *http.Server {
 	// TLS_KEY: private key corresponding to the public one in TLS_CRT
 	tlsConfig := &tls.Config {
 
-		GetCertificate: certRequestFunc(Utils.GetEnvVar("TLS_CRT"), Utils.GetEnvVar("TLS_KEY")),
+		GetCertificate: certRequestFunc(GetEnvVar("TLS_CRT"), GetEnvVar("TLS_KEY")),
 	}
 
 	// Http server.
@@ -26,7 +25,7 @@ func createServer(engine *gin.Engine) *http.Server {
 	// TLSConfig: tls configurations described above
 	server := &http.Server {
 
-		Addr:      Utils.GetEnvVar("PORT"),
+		Addr:      GetEnvVar("PORT"),
 		Handler:   engine,
 		TLSConfig: tlsConfig,
 	}

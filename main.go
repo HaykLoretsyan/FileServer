@@ -1,7 +1,6 @@
 package main
 
 import (
-	"SafeToGo/Utils"
 	"github.com/gin-gonic/gin"
 )
 
@@ -22,12 +21,12 @@ func main() {
 	server := createServer(engine)
 
 	// Starting the server
-	if Utils.GetEnvVar("TLS") == "true" {
+	if GetEnvVar("TLS") == "true" {
 		// Waiting for tls-encrypted (https) connection
-		Utils.Must(server.ListenAndServeTLS("", ""))
+		Must(server.ListenAndServeTLS("", ""))
 
 	} else {
 		// Waiting for non-encrypted (http) connection
-		Utils.Must(server.ListenAndServe())
+		Must(server.ListenAndServe())
 	}
 }

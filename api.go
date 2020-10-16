@@ -1,7 +1,6 @@
 package main
 
 import (
-	"SafeToGo/Utils"
 	"encoding/json"
 	"github.com/gin-gonic/gin"
 	"io"
@@ -13,7 +12,7 @@ import (
 
 func getList(c *gin.Context) {
 
-	root := Utils.GetEnvVar("MAPS_PATH")
+	root := GetEnvVar("MAPS_PATH")
 
 	var files []string
 	err := filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
@@ -53,7 +52,7 @@ func getMap(c *gin.Context) {
 	var file *os.File
 	file, err = getFile(name)
 	if err != nil {
-		c.Writer.WriteHeader(http.StatusBadRequest)
+		c.Writer.WriteHeader(http.StatusNotFound)
 		return
 	}
 
@@ -94,7 +93,7 @@ func getMap(c *gin.Context) {
 
 func getFile(filename string) (*os.File, error) {
 
-	file, err := os.Open(Utils.GetEnvVar("maps_path") + string(os.PathSeparator) + filename)
+	file, err := os.Open(GetEnvVar("MAPS_PATH") + string(os.PathSeparator) + filename)
 	if err != nil {
 		//File not found, send 404
 		return nil, err
